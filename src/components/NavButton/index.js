@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const NavButton = ({label, source}) => {
   return (
     <NavBarItem>
-      <Button onClick={() => source}>{label}</Button>
+      <Button source={source}>{label}</Button>
     </NavBarItem>
   )
 }

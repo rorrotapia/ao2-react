@@ -1,33 +1,33 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import { motion, AnimatePresence } from "framer-motion";
+
 import NavButton from "../NavButton";
 
 const Header = () => {
-    const [displayMenu, setDisplayMenu] = useState(false);
+    const [displayMenu, setDisplayMenu] = useState(null);
 
     return (
       <>
         <MenuHamburger onClick={() => setDisplayMenu(!displayMenu)}>
           <Image src={"/hambergermenu.svg"}/>
         </MenuHamburger>
-        <AnimatePresence mode="sync">
-          {(displayMenu)  &&
+        
           <NavBar
+            style={{display: displayMenu &&  'block' }}
             key={1}
+            speed={10}
             exit={{ y: 500 }}
             animate={{ y: 0 }}
             initial={{ y: 500 }}
-            transition={{ duration: 0.8, ease:"easeIn" }}
+            transition={{ duration: 0.5, ease:"easeIn" }}
           >
             <NavBarColumn>
               <NavButton source="/civilizations" label="civilisation"/>
               <NavButton source="/units" label="Units"/>
-              <NavButton source="/tips" label="Tips"/>
             </NavBarColumn>
           </NavBar>
-             }
-        </AnimatePresence>
+     
       </>
     )
 }
@@ -59,7 +59,9 @@ const NavBar = styled(motion.nav)`
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
   z-index: 1;
+  display: none;
   @media (min-width: 1024px){
+    display: block;
     left: 5rem;
     width: 25%;
     height: 100vh;

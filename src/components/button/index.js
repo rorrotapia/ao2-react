@@ -1,19 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Button = (props) => {
+const Button = ({source, children}) => {
 
   return (
-    <Btn>{props.children}</Btn>
+    <Btn href={source}>{children}</Btn>
   )
 }
 
-const Btn = styled.button`
-  width: 100%;
+const Btn = styled.a`
+  width: auto;
   font-family: "Book Antiqua";
   font-size: 1rem;
   color: white;
   display: block;
+  text-decoration: none;
   padding:.5rem 1rem;
   text-transform: uppercase;
   letter-spacing: 2px;

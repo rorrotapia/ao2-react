@@ -4,11 +4,13 @@ import Card from "../../components/card";
 import axios from "axios";
 import ActionBar from "../../components/ActionBar";
 import styled from "styled-components";
+import unitsJson from '../../data/units.json'
 
 const Unit = () => {
-  const [unit, setUnit] = useState(null);
   const { unitId } = useParams()
-  useEffect(() => {
+  const [unit, setUnit] = useState(unitsJson[unitId]);
+  
+  /*useEffect(() => {
     axios.get(`https://cors-rorrotapia.herokuapp.com/https://age-of-empires-2-api.herokuapp.com/api/v1/unit/${unitId}`)
       .then((response) => {
         console.log(response)
@@ -16,7 +18,7 @@ const Unit = () => {
       }).catch((response) => {
         console.log(response)
     })
-  }, [])
+  }, [])*/
 
   if (!unit) return `No post! ${unit}`
 
@@ -25,9 +27,9 @@ const Unit = () => {
       <BlockTop>
         <div>
           <p>{unit.age}</p>
-          {Object.keys(unit.cost).map((key) => {
+          {Object.keys(unit.cost).map((key,index) => {
             return (
-              <p key={key}>{key}: {unit.cost[key]}</p>
+              <p key={index}>{key}: {unit.cost[key]}</p>
             )
           })}
         </div>
