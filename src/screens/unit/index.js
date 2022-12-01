@@ -25,27 +25,34 @@ const Unit = () => {
     <Container>
       <BlockContainer>
         <BlockTop>
-          <BlockTopImg src={`/units/unit (${random_img}).png`} alt=""/>
-          <ImgAge src={`/age/age-${unit.age}.png`}/>
-          <CostDescription>
-            {Object.keys(unit.cost).map((key,index) => {
-              return (
-                <>
-                  <img src={`/resources/tribute_${key.toLowerCase()}.png`} alt=""/>
-                  <p key={index}>{unit.cost[key]}</p>
-                </>
-              )
-            })}
-          </CostDescription>
+          <HeadingUnit>
+            <BlockTopImg src={`/units/unit (${random_img}).png`} alt=""/>
+            <CostDescription>
+              <p>Created: {unit.created_in}</p>
+              {Object.keys(unit.cost).map((key,index) => {
+                return (
+                  <div>
+                    <img src={`/resources/tribute_${key.toLowerCase()}.png`} alt=""/>
+                    <p key={index}>{unit.cost[key]}</p>
+                  </div>
+                )
+              })}
+            </CostDescription>
+          </HeadingUnit>
         </BlockTop>
         <div>
           <TitleUnit>{unit.name}</TitleUnit>
+          <ImgAge src={`/age/age-${unit.age}.png`}/>
           <p>{unit.description}</p>
         </div>
       </BlockContainer>
     </Container>
   );
 }
+
+const HeadingUnit = styled.div`
+  display: flex;
+`;
 
 const ImgAge = styled.img`
   width: 50px;
@@ -54,17 +61,35 @@ const ImgAge = styled.img`
 
 const CostDescription = styled.div`
   display: flex;
+  flex-direction: column;
+  align-self: center;
+  
+  div {
+    display: flex;
+    margin: .5rem .5rem;
+    align-items: center;
+    img {
+      width: 50px;
+      height: 35px;
+    }
+    p {
+      margin-left: .5rem;
+      font-weight: 600;
+    }
+  }
 `;
 
 const Container = styled.div`
   display: flex;
   margin: auto;
+  width: 100%;
 `;
 
 const BlockContainer = styled.div`
   height: 60vh;
-  width: auto;
-  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(2px);
   border: 1px solid #BD884E;
   color: white;
@@ -82,7 +107,8 @@ const TitleUnit = styled.h1`
 `;
 
 const BlockTopImg = styled.img`
-  border-radius: 15px;
+  width: 200px;
+  height: 200px;
 `;
 const BlockTop = styled.div`
   width: 100%;

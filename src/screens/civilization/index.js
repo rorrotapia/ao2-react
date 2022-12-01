@@ -17,19 +17,35 @@ const Civilization = () => {
   }, [])*/
 
   if (!civ) return `No post! ${civ}`
-
+  let arrayBonus = civ.civilization_bonus.split(';');
   return (
     <Container>
-      <BlockTop>
-        <BlockBottom>
+        <BlockContainer>
           <BlockTopImg src={`/civs/menu_techtree_${civ.name.toLowerCase()}.png`} alt=""/>
           <TitleUnit>{civ.name}</TitleUnit>
           <DescriptionUnit>{civ.army_type}</DescriptionUnit>
-        </BlockBottom>
-      </BlockTop>
+          <List>
+            <h6>Bonus</h6>
+            {arrayBonus.map((value) => {
+              return <li>{value}</li>
+            })}
+          </List>
+        </BlockContainer>
     </Container>
   );
 }
+
+const List = styled.ul`
+  text-align: left;
+  h6 {
+    margin: 0;
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+  li {
+    margin: 0;
+  }
+`;
 
 const DescriptionUnit = styled.p`
   color: white;
@@ -38,7 +54,7 @@ const DescriptionUnit = styled.p`
 const TitleUnit = styled.h1`
   font-family: "Book Antiqua";
   font-size: 1.5rem;
-  background: -webkit-linear-gradient(rgba(255,173,51,1), rgba(255,211,68,1));
+  background: -webkit-linear-gradient(rgb(255, 151, 0), rgb(255, 189, 0));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
@@ -46,24 +62,20 @@ const TitleUnit = styled.h1`
 `;
 
 const BlockTopImg = styled.img`
-  border-radius: 15px;
-  width: 50px;
-`;
-const BlockTop = styled.div`
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
+  width: 150px;
 `;
 
 const Container = styled.div`
-  justify-content: center;
   display: flex;
-  flex-direction: column;
+  margin: auto;
+  width: 100%;
 `;
 
-const BlockBottom = styled.div`
+const BlockContainer = styled.div`
   height: 60vh;
-  width: auto;
+  padding: 1rem;
+  width: 100%;
+  margin: auto;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
   border: 1px solid #BD884E;
