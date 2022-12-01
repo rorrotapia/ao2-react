@@ -11,7 +11,7 @@ const NavButton = ({label, source}) => {
 }
 
 const NavBarItem = styled.li`
-  width: 50%;
+  width: 80%;
   margin: 1rem;
   @media (min-width: 1024px) {
     width: 70%;

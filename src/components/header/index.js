@@ -12,36 +12,33 @@ const Header = () => {
         <MenuHamburger onClick={() => setDisplayMenu(!displayMenu)}>
           <Image src={"/hambergermenu.svg"}/>
         </MenuHamburger>
-        
-          <NavBar
-            style={{display: displayMenu &&  'block' }}
-            key={1}
-            speed={10}
-            exit={{ y: 500 }}
-            animate={{ y: 0 }}
-            initial={{ y: 500 }}
-            transition={{ duration: 0.5, ease:"easeIn" }}
-          >
-            <NavBarColumn>
-              <NavButton source="/civilizations" label="civilisation"/>
-              <NavButton source="/units" label="Units"/>
-            </NavBarColumn>
-          </NavBar>
-     
+        <NavBar
+          style={{display: displayMenu &&  'block' }}
+          key={1}
+        >
+          <NavBarColumn>
+            <NavButton source="/" label="Home"/>
+            <NavButton source="/civilizations" label="civilization"/>
+            <NavButton source="/units" label="units"/>
+          </NavBarColumn>
+        </NavBar>
       </>
     )
 }
 
 const MenuHamburger = styled.div`
   border-radius: 50%;
-  background: gray;
-  display:flex;
+  z-index: 10;
+  background: #947243;
+  display: flex;
   width: 50px;
   height: 50px;
+  margin: 1rem;
+  box-shadow: 0px 0px 15px 2px rgb(0 0 0 / 20%);
   align-items: center;
   justify-content: center;
   position: absolute;
-  @media (min-width: 1024px){
+  @media (min-width: 1024px) {
     display: none;
   }
 `;
@@ -51,7 +48,7 @@ const Image = styled.img`
   width: 40px;
 `;
 
-const NavBar = styled(motion.nav)`
+const NavBar = styled.nav`
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -62,8 +59,9 @@ const NavBar = styled(motion.nav)`
   display: none;
   @media (min-width: 1024px){
     display: block;
-    left: 5rem;
-    width: 25%;
+    left: 3vw;
+    width: 35vw;
+    max-width: 400px;
     height: 100vh;
     border-left: 1px solid #BD884E;
     border-right: 1px solid #BD884E;
@@ -81,14 +79,6 @@ const NavBarColumn = styled.ul`
     height: 100vh;
     justify-content: center;
   }
-`;
-
-const NavbarOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  background: gray;
 `;
 
 

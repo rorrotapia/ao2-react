@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react"
 import {useNavigate} from "react-router-dom";
-import Card from "../../components/card";
 import axios from "axios";
 import unitsJson from '../../data/units.json'
+import Card from "../../components/card";
+import {motion} from 'framer-motion'
+import styled from "styled-components";
 
 const Units = () => {
     const [post, setPost] = useState(unitsJson);
@@ -18,23 +20,54 @@ const Units = () => {
       })
     }, [])*/
 
+
+    const container = {
+        show: {
+            transition: {
+                delayChildren: 0.2,
+                staggerChildren: 0.2
+            }
+        }
+    }
+    const item = {
+        hidden: {
+            x: -1000,
+            opacity: 0
+        },
+        show: {
+            x: 0,
+            opacity: 1,
+            transition: {
+                ease: "easeInOut"
+            }
+        }
+    }
+
     if (!post) return `No post! ${post}`
 
     return (
-      <>
-        { post.map((unit,index) => {
+      <Container variants={container} initial={"hidden"} animate={"show"}>
+      { post.map((unit,index) => {
+          let random_img = Math.floor(Math.random() * (58 - 1 + 1)) + 1;
+
           return (
-            <div key={index}>
-              <p>
-                <a href={`units/${index}`}>
-                  {unit.name}
-                </a>
-              </p>
-            </div>
+            <motion.div variants={item} key={index}>
+                <Card
+                  src={`/units/unit (${random_img}).png`}
+                  link={`/units/${index}`}
+                  index={index}
+                  title={unit.name}/>
+            </motion.div>
           );
         })}
-      </>
+      </Container>
     );
 }
+
+
+const Container = styled(motion.div)`
+  overflow-y: scroll;
+  height: 100vh;
+`;
 
 export  default Units

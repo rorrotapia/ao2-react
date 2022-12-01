@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react"
 import {Route, useNavigate} from "react-router-dom";
 import axios from "axios";
-import styled from "styled-components";
 import civsJson from '../../data/civs.json'
+import Card from "../../components/card";
+import {motion} from 'framer-motion'
+import styled from "styled-components";
 
 const Civilizations = () => {
   const [civs, setCiv] = useState(civsJson);
@@ -19,35 +21,51 @@ const Civilizations = () => {
   }, [])*/
   
   if (!civs) return `No post! ${civs}`
-  
+
+  const container = {
+    show: {
+      transition: {
+        delayChildren: 0.2,
+        staggerChildren: 0.2
+      }
+    }
+  }
+  const item = {
+    hidden: {
+      x: -1000,
+      opacity: 0
+    },
+    show: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        ease: "easeInOut"
+      }
+    }
+  }
+
+
   return (
-    <>
+    <Container variants={container} initial={"hidden"} animate={"show"}>
       { civs.map((civ, index) => {
         return (
-          <div key={index}>
-            <Card>
-              <img width={100} height={100} src={`/civs/menu_techtree_${civ.name.toLowerCase()}.png`} alt=""/>
-              <CardButton href={`civilization/${index}`}>
-                {civ.name}
-              </CardButton>
-            </Card>
-          </div>
+          <motion.div variants={item} key={index}>
+          <Card
+            src={`/civs/menu_techtree_${civ.name.toLowerCase()}.png`}
+            link={`/civilizations/${index}`}
+            index={index}
+            title={civ.name}/>
+          </motion.div>
         );
       })}
-    </>
+    </Container>
   );
 }
 
-const Card = styled.div`
-  background-color: #282c34;
 
-  margin: 1rem;
-  padding: .5rem;
-`;
-
-const CardButton = styled.a`
-  color: white;
-  text-decoration: none;
+const Container = styled(motion.div)`
+  overflow-y: scroll;
+  height: 100vh;
 `;
 
 export  default Civilizations

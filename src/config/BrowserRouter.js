@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     element: <Civilizations />
   },
   {
-    path: "/civilization/:civId",
+    path: "/civilizations/:civId",
     element: <Civilization />
   },
   {
@@ -49,11 +49,11 @@ const BrowserRouter = () => {
 };
 
 const Background = styled.div`
-    background-image: url(${"background.jpg"});
+    background-image: url(${"/mainmenu_bg.jpg"});
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    overflow: scroll;
+    overflow: hidden;
     height: 100vh;
     width: 100%;
 `;
@@ -63,9 +63,9 @@ const Container = styled.main`
   flex-direction: column;
   min-height: 100vh;
   @media (min-width: 1024px){
-    width: 60%;
-    margin-left: 35%;
-    margin-right: 0 ;
+    width: 55vw;
+    margin-left: auto;
+    margin-right: 3vw;
   }
 `;
 
